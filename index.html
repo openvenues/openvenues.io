@@ -1,9 +1,417 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
+  <meta charset='utf-8'>
+  <meta http-equiv='x-ua-compatible' content='ie=edge'>
   <title>OpenVenues, sponsored by Mapzen</title>
+
+  <meta name='description' content=''>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css'>
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css'>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic|Raleway:100'>
+  <link rel='stylesheet' href='stylesheets/foundation.css'>
+  <link rel='shortcut icon' href='./favicon.ico'>
+
+  <script src='scripts/vendor/modernizr.js'></script>
+
+  <style>
+    body,
+    h2, h3, h4, h5, h6 {
+      font-family: 'Source Sans Pro', sans-serif;;
+    }
+
+    h1 {
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .hero {
+      position: relative;
+
+      -webkit-user-select: none;
+    }
+
+    .hero iframe {
+      position: absolute;
+    }
+
+    .hero-text {
+      pointer-events: none;
+    }
+
+    .hero-text h1,
+    .hero-text p {
+      background-color: rgba(255, 255, 255, 0.80);
+      padding: 0 16px 4px;
+      display: inline-block;
+    }
+
+    .hero-text h1 {
+      margin-top: 1.5em;
+      font-size: 3rem;
+      color: #0f86bd;
+      letter-spacing: -0.04em;
+      text-shadow: 0 1px 0 whitesmoke;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+      .hero-text h1 {
+        font-size: 4rem;
+      }
+    }
+
+    @media only screen and (min-width: 64.063em) {
+      .hero-text h1 {
+        font-size: 5rem;
+      }
+    }
+
+    .hero-text h1 .lighter {
+      color: #66b2d5;
+    }
+
+    .hero-text p {
+      padding: 12px 16px;
+      margin-top: 0.5em;
+      font-size: 1.2em;
+      color: #444;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+      .hero-text p {
+        width: 75%;
+      }
+    }
+
+    .button {
+      border: 2px solid #444;
+      padding: 8px 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 3em;
+      font-size: 14px;
+      background: white;
+    }
+
+    .button:hover {
+      background-color: #f7f7f7;
+    }
+
+    .headroom {
+      margin-top: 2em;
+    }
+
+    h2 {
+      color: #0f86bd;
+      font-weight: 300;
+    }
+
+    .sponsored {
+      font-size: 14px;
+      font-weight: 400;
+      color: #777;
+      line-height: 36px;
+      border-top: 1px solid #eee;
+      padding: 1em;
+      margin-bottom: 1em;
+    }
+
+    .sponsored img {
+      height: 36px;
+      margin-left: 0.5em;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    th {
+      text-transform: uppercase;
+      color: #66b2d5;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    tr {
+      border-bottom: 1px solid #eee;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+      th[abbr='City'] {
+        width: 200px;
+      }
+    }
+
+    td,
+    th {
+      padding: 0.25em 0;
+    }
+
+    td.download {
+      color: #999;
+    }
+
+    td.preview {
+      text-align: right;
+    }
+
+    a.preview {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #444;
+      font-size: 14px;
+    }
+
+    a.preview::after {
+      content: '»';
+      margin-left: 0.5em;
+    }
+
+  </style>
 </head>
 <body>
-  <h1>OpenVenues. Coming soon.</h1>
+
+  <section class='hero' id='you-are-my-hero' role='banner'>
+    <div class='map' id='map'></div>
+    <iframe width='100%' height='100%' frameBorder='0' src='https://a.tiles.mapbox.com/v4/louh.lml9n231/attribution.html?access_token=pk.eyJ1IjoibG91aCIsImEiOiJGYnhtSkxNIn0.ARJ4Oe39tqeFG_tkyzHqNg'></iframe>
+
+    <div class='hero-text row'>
+      <div class='large-12 columns'>
+        <h1><span class='lighter'>Open</span>Venues</h1>
+
+        <p>
+          Get your daily recommended dose of points of interest into your bloodstream from the world’s most popular cities from around the world. No purchase required.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section role='main'>
+
+    <div class='row headroom'>
+      <div class='large-12 columns'>
+        <h2>About the data</h2>
+
+        <p>
+          OK, so basically the robot spiders jealously guard the vast trove of information they scavenge from this wide world we call the Web, but there is this awesome strike force of mercernary arachnids that also go out and meticulously write down everything they see on these college-rule lined notebooks that they publish at <a href='http://commoncrawl.org/'>Common Crawl</a>, which is a small Irish pub with a pretty neat open mic night located in a quiet alley in the arts district of Sao Paolo. What we do is send even more robots to wade through Common Crawl and extract any information about venues and other points of interest (POIs), using a highly specialized magnet, and then we format it neatly, so that you can use the data and you don’t even owe us any favors or anything.
+        </p>
+
+        <p>
+          So that is OpenVenues. We currently have data for the entire planet (of Earth) but currently offer chunks of points that are clustered around some major cities (but not Chicago, fuck you Chicago). The cities we currently have can be downloaded on this page but the one with the entire planet in it is kind of large so up to you if you want to RIP your cable bill. We will refresh this data periodically so come back again for updates also sometimes we will add new metropolitan areas.
+        </p>
+
+        <p>
+          <a href='https://github.com/openvenues/openvenues/' class='small button'>View source code</a>
+        </p>
+
+      </div>
+    </div>
+
+    <div class='row headroom'>
+      <div class='large-12 columns'>
+        <h2>Data downloads</h2>
+
+        <table role='grid'>
+          <thead>
+            <tr>
+              <th abbr='City'>City</th>
+              <th abbr='Link'>Download link</th>
+              <th abbr='Extra'></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope='row'><strong>Amsterdam</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/amsterdam.geojson'>GeoJSON</a> – 4.9 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Atlanta</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/atlanta.geojson'>GeoJSON</a> – 1.5 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Austin</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/austin.geojson'>GeoJSON</a> – 2.2 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Bangkok</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/bangkok.geojson'>GeoJSON</a> – 4.0 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Barcelona</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/barcelona.geojson'>GeoJSON</a> – 7.6 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Beijing</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/beijing.geojson'>GeoJSON</a> – 1.4 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Berlin</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/berlin.geojson'>GeoJSON</a> – 6.9 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Boston</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/boston.geojson'>GeoJSON</a> – 2.2 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Capetown</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/capetown.geojson'>GeoJSON</a> – 1.2 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Los Angeles</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/la.geojson'>GeoJSON</a> – 6.0 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>London</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/london.geojson'>GeoJSON</a> – 2.1 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Madrid</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/madrid.geojson'>GeoJSON</a> – 5.6 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Melbourne</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/melbourne.geojson'>GeoJSON</a> – 1.3 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Missoula</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/missoula.geojson'>GeoJSON</a> – 827 KB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Moscow</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/moscow.geojson'>GeoJSON</a> – 1.3 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Mumbai</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/mumbai.geojson'>GeoJSON</a> – 1.5 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>New York City</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/nyc.geojson'>GeoJSON</a> – 40.9 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Paris</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/paris.geojson'>GeoJSON</a> – 11.5 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Portland</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/portland.geojson'>GeoJSON</a> – 3.0 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Prague</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/prague.geojson'>GeoJSON</a> – 3.1 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Reykjavik</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/reykjavik.geojson'>GeoJSON</a> – 508 KB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Rio de Janiero</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/rio.geojson'>GeoJSON</a> – 2.9 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Rome</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/rome.geojson'>GeoJSON</a> – 7.5 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>San Francisco</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/sf.geojson'>GeoJSON</a> – 6.9 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Seattle</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/seattle.geojson'>GeoJSON</a> – 2.1 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Stockholm</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/stockholm.geojson'>GeoJSON</a> – 1.1 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Tokyo</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/tokyo.geojson'>GeoJSON</a> – 3.5 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Vancouver</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/vancouver.geojson'>GeoJSON</a> – 2.1 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+            <tr>
+              <td scope='row'><strong>Washington, D.C.</strong></td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues.static/cities/dc.geojson'>GeoJSON</a> – 4.4 MB</td>
+              <td class='preview'><a href='' class='preview'>Preview</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class='row headroom'>
+      <div class='large-12 columns'>
+        <h2>Contact us</h2>
+
+        <p>
+          Got questions, comments, fan mail or favorite documentary suggestions? <a href='mailto:contact@openvenues.io'>Send us some electronic mail.</a>
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class='row headroom'>
+      <div class='large-4 large-offset-4 columns text-center sponsored'>
+        Sponsored by <a href='https://mapzen.com/'><img src='images/mapzen-logo.png' alt='Mapzen'></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js'></script>
+  <script src='scripts/foundation.min.js'></script>
+  <script>
+    $(document).foundation();
+  </script>
+  <script>
+    function setHeroMapContainerHeight () {
+      var viewportHeight = document.documentElement.clientHeight
+      var demoContainerEl = document.getElementById('you-are-my-hero')
+      var minHeight = 600
+      var maxHeightPercentage = 0.6
+      demoContainerEl.style.height = Math.max(minHeight, Math.floor(maxHeightPercentage * viewportHeight)) + 'px'
+    }
+
+    $(document).ready(function () {
+      setHeroMapContainerHeight()
+      window.addEventListener('resize', setHeroMapContainerHeight)
+    })
+  </script>
+
 </body>
 </html>
