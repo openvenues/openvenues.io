@@ -10,7 +10,7 @@
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css'>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css'>
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic|Raleway:100'>
-  <link rel='stylesheet' href='stylesheets/foundation.css'>
+  <link rel='stylesheet' href='stylesheets/vendor/foundation.min.css'>
   <link rel='shortcut icon' href='./favicon.ico'>
 
   <script src='scripts/vendor/modernizr.js'></script>
@@ -27,12 +27,18 @@
 
     .hero {
       position: relative;
-
       -webkit-user-select: none;
+              user-select: none;
     }
 
-    .hero iframe {
+    .hero iframe,
+    .map {
       position: absolute;
+    }
+
+    .map {
+      height: 100%;
+      width: 100%;
     }
 
     .hero-text {
@@ -162,6 +168,8 @@
       text-transform: uppercase;
       color: #444;
       font-size: 14px;
+      /* Disabled */
+      display: none;
     }
 
     a.preview::after {
@@ -173,9 +181,8 @@
 </head>
 <body>
 
-  <section class='hero' id='you-are-my-hero' role='banner'>
+  <section class='hero' id='hero' role='banner'>
     <div class='map' id='map'></div>
-    <iframe width='100%' height='100%' frameBorder='0' src='https://a.tiles.mapbox.com/v4/louh.lml9n231/attribution.html?access_token=pk.eyJ1IjoibG91aCIsImEiOiJGYnhtSkxNIn0.ARJ4Oe39tqeFG_tkyzHqNg'></iframe>
 
     <div class='hero-text row'>
       <div class='large-12 columns'>
@@ -395,16 +402,28 @@
     </div>
   </footer>
 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-47035811-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
+  <script src='scripts/vendor/foundation.min.js'></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js'></script>
-  <script src='scripts/foundation.min.js'></script>
+  <script src='https://mapzen.com/tangram/0.1.1/tangram.debug.js'></script>
+
   <script>
     $(document).foundation();
   </script>
   <script>
     function setHeroMapContainerHeight () {
       var viewportHeight = document.documentElement.clientHeight
-      var demoContainerEl = document.getElementById('you-are-my-hero')
+      var demoContainerEl = document.getElementById('hero')
       var minHeight = 600
       var maxHeightPercentage = 0.6
       demoContainerEl.style.height = Math.max(minHeight, Math.floor(maxHeightPercentage * viewportHeight)) + 'px'
@@ -415,6 +434,7 @@
       window.addEventListener('resize', setHeroMapContainerHeight)
     })
   </script>
+  <script src='scripts/map.js'></script>
 
 </body>
 </html>
