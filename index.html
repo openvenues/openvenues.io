@@ -37,9 +37,22 @@
     }
 
     .map {
-      height: 100%;
       width: 100%;
+      height: 100%;
       cursor: default;
+    }
+
+    .demo-blocker.disable-blocker {
+      display: none;
+    }
+    .demo-blocker {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      left: 0px;
+      top: 0px;
+      z-index: 1998;
     }
 
     .hero-text {
@@ -199,6 +212,7 @@
 
   <section class='hero' id='hero' role='banner'>
     <div class='map' id='map'></div>
+    <div class='map-blocker'></div>
 
     <div class='hero-text row'>
       <div class='large-12 columns'>
@@ -437,17 +451,35 @@
     $(document).foundation();
   </script>
   <script>
-    function setHeroMapContainerHeight () {
+    var heroEl = document.getElementById('hero')
+    var blocker = document.getElementsByClassName('map-blocker')[0]
+    var justTouchedDemoContainer
+
+    function setHeroContainerHeight () {
       var viewportHeight = document.documentElement.clientHeight
-      var demoContainerEl = document.getElementById('hero')
       var minHeight = 600
       var maxHeightPercentage = 0.6
-      demoContainerEl.style.height = Math.max(minHeight, Math.floor(maxHeightPercentage * viewportHeight)) + 'px'
+      heroEl.style.height = Math.max(minHeight, Math.floor(maxHeightPercentage * viewportHeight)) + 'px'
     }
 
     $(document).ready(function () {
-      setHeroMapContainerHeight()
-      window.addEventListener('resize', setHeroMapContainerHeight)
+      setHeroContainerHeight()
+      window.addEventListener('resize', setHeroContainerHeight)
+    })
+
+    heroEl.addEventListener('mouseover', function (e) {
+      if (!justTouchedDemoContainer) {
+        blocker.classList.add('disable-blocker')
+      }
+    })
+    heroEl.addEventListener('mouseout', function (e) {
+      blocker.classList.remove('disable-blocker')
+    })
+    heroEl.addEventListener('touchstart', function (e) {
+      blocker.classList.remove('disable-blocker')
+      justTouchedDemoContainer = setTimeout(function () {
+        clearTimeout(justTouchedDemoContainer)
+      }, 2000)
     })
   </script>
   <script src='scripts/map.js'></script>

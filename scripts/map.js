@@ -19,8 +19,6 @@
   })
   var layer = Tangram.leafletLayer({
     scene: 'tangram/scene.yaml',
-    highDensityDisplay: true,
-    logLevel: 'debug',
     attribution: '<a href="https://mapzen.com/tangram">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/">Mapzen</a>'
   })
   var scene = layer.scene
