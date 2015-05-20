@@ -26,14 +26,14 @@
   var scene = layer.scene
 
   map.attributionControl.setPrefix('')
-  map.setView([40.708, -74.004], 15)
+  map.setView([40.708, -74.006], 15)
 
   // Feature selection
   function initFeatureSelection () {
     // Selection info shown on hover
-    var selection_info = document.createElement('div');
-    selection_info.setAttribute('class', 'label');
-    selection_info.style.display = 'block';
+    var selection_info = document.createElement('div')
+    selection_info.className = 'poi-label'
+    selection_info.style.display = 'block'
 
     // Show selected feature on hover
     scene.container.addEventListener('mousemove', function (event) {
@@ -52,7 +52,7 @@
           if (label != '') {
             selection_info.style.left = (pixel.x + 5) + 'px';
             selection_info.style.top = (pixel.y + 15) + 'px';
-            selection_info.innerHTML = '<span class="labelInner">' + label + '</span>';
+            selection_info.innerHTML = '<span class="poi-label-inner">' + label + '</span>';
             scene.container.appendChild(selection_info);
           }
           else if (selection_info.parentNode != null) {
