@@ -1,0 +1,29 @@
+{
+  "name": "openvenues.io",
+  "version": "0.1.0",
+  "author": "Lou Huang <lou@mapzen.com>",
+  "description": "OpenVenues.io static site",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/openvenues/openvenues.io.git"
+  },
+  "main": "lib/makegeo.js",
+  "scripts": {
+    "start": "node lib/makegeo",
+    "test": "standard"
+  },
+  "dependencies": {
+    "geojson": "^0.2.1",
+    "superagent": "^1.2.0",
+    "xml2js": "^0.4.8"
+  },
+  "devDependencies": {
+    "standard": "^3.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "**/vendor/**"
+    ]
+  }
+}

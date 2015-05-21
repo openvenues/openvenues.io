@@ -4,8 +4,6 @@
   'use strict'
 
   var map = L.map('map', {
-    minZoom: 15,
-    maxZoom: 15,
     dragging: false,
     touchZoom: false,
     scrollWheelZoom: false,
@@ -24,7 +22,7 @@
   var scene = layer.scene
 
   map.attributionControl.setPrefix('')
-  map.setView([40.708, -74.006], 15)
+  //map.setView([40.708, -74.006], 15)
 
   // Feature selection
   function initFeatureSelection () {
@@ -77,5 +75,12 @@
       initFeatureSelection()
     })
     layer.addTo(map)
+
+    $.get('data/cities.geojson', function (data) {
+      data = JSON.parse(data)
+      var cities = L.geoJson(data).addTo(map)
+      map.fitBounds(cities.getBounds())
+    })
+
   })
 }())
