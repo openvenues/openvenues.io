@@ -71,7 +71,7 @@
             {{ #manifest }}
             <tr>
               <td class='city' scope='row'><strong>{{ cityname }}</strong></td>
-              <td class='download'><a href='http://s3.amazonaws.com/openvenues-static-public/{{ filename }}'>GeoJSON</a> – {{ formattedsize }}</td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues-static-public/{{{ filename }}}'>GeoJSON</a> – {{ formattedsize }}</td>
               <td class='preview'><a href='' class='preview'>Preview</a></td>
             </tr>
             {{ /manifest }}
