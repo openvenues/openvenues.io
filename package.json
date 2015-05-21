@@ -15,7 +15,11 @@
   },
   "dependencies": {
     "geojson": "^0.2.1",
+    "html-minifier": "^0.7.2",
+    "moment": "^2.10.3",
+    "mustache": "^2.0.0",
     "superagent": "^1.2.0",
+    "underscore": "^1.8.3",
     "xml2js": "^0.4.8"
   },
   "devDependencies": {

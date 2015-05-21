@@ -129,6 +129,8 @@ h2 {
 
 table {
   width: 100%;
+  /* temporary */
+  max-width: 600px;
 }
 
 th {
@@ -143,7 +145,7 @@ tr {
 }
 
 @media only screen and (min-width: 40.063em) {
-  th[abbr='City'] {
+  th.city {
     width: 200px;
   }
 }
@@ -151,6 +153,12 @@ tr {
 td,
 th {
   padding: 0.25em 0;
+}
+
+/* temporary */
+th.download,
+td.download {
+  text-align: right;
 }
 
 td.download {
@@ -166,7 +174,7 @@ a.preview {
   text-transform: uppercase;
   color: #444;
   font-size: 14px;
-  /* Disabled */
+  /* temporary: disabled */
   display: none;
 }
 
@@ -189,4 +197,9 @@ a.preview::after {
   padding: 2px;
   background: white;
   opacity: 0.75;
+}
+
+.last-refresh {
+  font-style: italic;
+  color: #777;
 }
