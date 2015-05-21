@@ -77,10 +77,9 @@
     layer.addTo(map)
 
     $.get('data/cities.geojson', function (data) {
-      data = JSON.parse(data)
       var cities = L.geoJson(data).addTo(map)
       map.fitBounds(cities.getBounds())
-    })
+    }, 'json')
 
   })
 }())
