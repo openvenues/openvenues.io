@@ -3,6 +3,8 @@
 (function () {
   'use strict'
 
+  var DEBUG = true
+
   var map = L.map('map', {
     dragging: false,
     touchZoom: false,
@@ -77,6 +79,24 @@
     $.get('data/cities.geojson', function (data) {
       var cities = L.geoJson(data).addTo(map)
       map.fitBounds(cities.getBounds())
+
+      // Hacky zoom tweaks
+      var zoom = map.getZoom()
+      if (zoom < 1) zoom = 1
+      if (zoom > 2) zoom = 2
+      map.setZoom(zoom + 1)
+
+      // Public / debuggable
+      if (DEBUG === true) {
+        window.cities = cities
+      }
     }, 'json')
   })
+
+  // Make stuff public
+  if (DEBUG === true) {
+    window.map = map
+    window.layer = layer
+    window.scene = scene
+  }
 }())
