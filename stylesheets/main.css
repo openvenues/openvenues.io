@@ -1,15 +1,3 @@
-.old-browser {
-  display: none;
-  width: 100%;
-  padding: 10px;
-  border-bottom: 1px solid lightgray;
-  background-color: lightyellow;
-}
-
-body.no-webgl .old-browser {
-  display: block;
-}
-
 body,
 h2, h3, h4, h5, h6 {
   font-family: 'Source Sans Pro', sans-serif;;
@@ -214,4 +202,16 @@ a.preview::after {
 .last-refresh {
   font-style: italic;
   color: #777;
+}
+
+.old-browser {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+  background-color: lightyellow;
+}
+
+html.no-webgl .old-browser {
+  display: block;
 }
