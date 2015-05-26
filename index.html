@@ -24,7 +24,7 @@
         var $this = $(this)
         var name = $this.data('name')
         var format = $this.data('format')
-        if (ga) {
+        if (typeof ga !== 'undefined') {
           ga('send', 'event', 'dataset', 'download', name, format)
         }
       })
