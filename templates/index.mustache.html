@@ -74,7 +74,7 @@
             {{ #manifest }}
             <tr>
               <td class='city' scope='row'><strong>{{ cityname }}</strong></td>
-              <td class='download'><a href='http://s3.amazonaws.com/openvenues-static-public/{{{ filename }}}'>GeoJSON</a> – {{ formattedsize }}</td>
+              <td class='download'><a href='http://s3.amazonaws.com/openvenues-static-public/{{{ filename }}}' class='js--download-link' data-name='{{ cityname }}' data-format='geojson'>GeoJSON</a> – {{ formattedsize }}</td>
               <td class='preview'><a href='' class='preview'>Preview</a></td>
             </tr>
             {{ /manifest }}
@@ -82,7 +82,7 @@
         </table>
 
         <p class='headroom'>
-        <a href='{{{ planet }}}' class='small button'>Download the entire planet</a>
+        <a href='{{{ planet }}}' class='small button js--download-link' data-name='planet' data-format='geojson'>Download the entire planet</a>
         </p>
       </div>
     </div>
@@ -140,6 +140,16 @@
     $(document).ready(function () {
       setHeroContainerHeight()
       window.addEventListener('resize', setHeroContainerHeight)
+
+      // Attach analytics to links
+      $('body').on('click', 'a.js--download-link', function () {
+        var $this = $(this)
+        var name = $this.data('name')
+        var format = $this.data('format')
+        if (ga) {
+          ga('send', 'event', 'dataset', 'download', name, format)
+        }
+      })
     })
 
     heroEl.addEventListener('mouseover', function (e) {
