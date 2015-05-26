@@ -102,6 +102,14 @@ h1 {
   color: white;
 }
 
+@media only screen and (max-width: 40.063em) {
+  .button {
+    display: block;
+    margin: 0px auto;
+    text-align: center;
+  }
+}
+
 .headroom {
   margin-top: 2em;
 }
@@ -144,12 +152,6 @@ tr {
   border-bottom: 1px solid #eee;
 }
 
-@media only screen and (min-width: 40.063em) {
-  th.city {
-    width: 200px;
-  }
-}
-
 td,
 th {
   padding: 0.25em 0;
@@ -159,6 +161,8 @@ th {
 th.download,
 td.download {
   text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
 }
 
 td.download {
