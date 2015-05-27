@@ -72,7 +72,7 @@
           </thead>
           <tbody>
             {{ #manifest }}
-            <tr>
+            <tr id='{{ id }}'>
               <td class='city' scope='row'><strong>{{ cityname }}</strong></td>
               <td class='download'><a href='http://s3.amazonaws.com/openvenues-static-public/{{{ filename }}}' class='js--download-link' data-name='{{ cityname }}' data-format='geojson'>GeoJSON</a> – {{ formattedsize }}</td>
               <td class='preview'><a href='' class='preview'>Preview</a></td>
