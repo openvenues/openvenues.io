@@ -69,7 +69,7 @@ styles:
 sources:
     osm:
         type: MVT
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt?api_key=vector-tiles-X4xCOf4
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt?api_key=vector-tiles-ICUxDOY
 
 layers:
     earth:
